@@ -1,0 +1,94 @@
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+            .images{
+                    display: flex;
+                    align-items: flex-start;
+                    transition: all 0.5s;
+                    }
+            .images > img{
+            
+            }
+            .wrap{
+            width: 300px;
+            overflow: hidden;
+            }
+            .red{
+                color:red;
+            }
+
+
+    </style>
+</head>
+<body>
+    <div class="wrap">
+            <div class="images" id="images" >
+                    <img src="https://fthmb.tqn.com/0ui_Zw01Ht9NHJkSBlqOIC1IH44=/960x0/filters:no_upscale()/yorkshire-terrier-583788122-581630e85f9b581c0b018a00.jpg"  alt="图片1" height=200>
+                    <img src="https://canna-pet.com/wp-content/uploads/2017/06/20-longest-living-dog-breeds_canna-pet-e1498599846169.jpg"  alt="" height=200>
+                    <img src="https://fthmb.tqn.com/0ui_Zw01Ht9NHJkSBlqOIC1IH44=/960x0/filters:no_upscale()/yorkshire-terrier-583788122-581630e85f9b581c0b018a00.jpg"  alt="" height=200>
+                    <img src="https://canna-pet.com/wp-content/uploads/2017/06/20-longest-living-dog-breeds_canna-pet-e1498599846169.jpg"  alt="" height=200>
+               
+                </div>
+    </div>
+
+    <span id="buttons">
+            <span >第一张</span>
+            <span >第二张</span>
+            <span >第三张</span>
+            <span >第四张</span>
+    </span>
+    
+
+
+
+    <script>
+        var allButtons =$('#buttons > span');
+        for(let i=0;i<allButtons.length;i++){
+            $(allButtons[i]).on('click',function(x){
+                var index = $(x.currentTarget).index();
+                var p = index* -300
+                $('#images').css({
+                    transform:'translate('+p+'px)'
+                })
+                n = index
+                activeButton(allButtons.eq(n))
+            })
+        }
+
+
+        var n = 0;
+        var size = allButtons.length
+        playSlide(n%size)
+        function playSlide(index){
+            allButtons.eq(index).trigger('click')
+            activeButton(allButtons.eq(index))
+        }
+        function activeButton($button){
+            $button.addClass('red').siblings('.red').removeClass('red');
+
+        }
+        function setTimer(){
+            return setInterval(()=>{
+                n+1
+                playSlide(n%size)
+            },2000)
+        }
+        var timerId=setInterval(()=>{
+            n += 1
+            playSlide(n%size)
+        },2000)
+
+        $('.wrap').on('mouseenter',function(){
+            window.clearInterval(timerId)
+        })
+        $('.wrap').on('mouseleave',function(){
+             timerId=setTimer()
+            })
+    </script>
+</body>
+</html>
