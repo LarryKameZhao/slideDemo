@@ -34,3 +34,20 @@
 /* .images > img.stay{
     transform: translateX(100%);
 } */
+
+
+.images2{
+    display: flex;
+    align-items: flex-start;
+    transition: all 0.5s;
+    }
+.images2 > img{
+
+}
+.wrap{
+width: 300px;
+overflow: hidden;
+}
+.red{
+color:red;
+}
